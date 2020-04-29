@@ -1,0 +1,53 @@
+@title: Guide to making MIPS libs
+@author:
+@date: 26/4/2020
+@last_modified: 26/4/2020
+
+1. Naming:
+
+Name of a function should follow the format:
+	+, Normal function: "lib_name" + "action" + "parameters"
+		ex: A function in string.asm, join 2 strings whose addresses is
+			stored in the 2 registers 
+			----> name: str_join_reg_reg
+	+, Function with short name: add '_' before name
+		ex: pop ----> _pop
+
+Name of variable: 
+	Add '_' before name: 
+		ex: str_num ---> _str_num
+
+Name of auto increment label:
+	Add '_' between name and number:
+		ex: str1 ---> str_1
+
+
+2. Coding:
+
+Function should retain value of all registers,
+except for functions which return values to $a0, $v0, ...
+
+-----> push all registers that will be used to stack at the beginning
+		pop all value stored in the stack at the end
+
+		----> number of push ~ number of pop
+
+Beware of unnecessary spaces, quotes
+	ex: define (name, ...) will raise error
+
+Care for divert: Usually a divert(-1) in the beginning,
+	and a divert(0)dnl at the end
+
+Care for comment: change comment at beginning and end
+
+3. Comment:
+
+Comment format:
+ Name
+ Usage
+ Input
+ Output
+ Side-effect
+ Warning( optional)
+ TODO( optional)
+ 
